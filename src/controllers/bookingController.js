@@ -20,6 +20,13 @@ export const createBooking = async (req, res) => {
     });
 
   } catch (error) {
+    if (error.message === 'PATIENT_SCHEDULE_OVERLAP') {
+      return res.status(400).json({
+        success: false,
+        message: 'Validation Failure: You already have a confirmed appointment during this time window.',
+      });
+    }
+
     if (error.message === 'SLOT_NOT_FOUND') {
       return res.status(404).json({ success: false, message: 'The requested slot does not exist.' });
     }

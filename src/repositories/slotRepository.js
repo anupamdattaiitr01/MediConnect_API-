@@ -1,5 +1,6 @@
 import pool, { query } from '../config/db.js';
 
+// --- MAKE SURE THIS IS AT THE TOP OF THE FILE ---
 export const findAvailableSlots = async (specializationSlug) => {
   let sql = `
     SELECT 
@@ -12,7 +13,7 @@ export const findAvailableSlots = async (specializationSlug) => {
     INNER JOIN users u ON s.doctor_id = u.id
     INNER JOIN doctor_profiles dp ON u.id = dp.user_id
     INNER JOIN specializations sp ON dp.specialization_id = sp.id
-    WHERE s.status = 'available' AND s.start_time > NOW()
+    WHERE s.status = 'available'
   `;
   
   const params = [];
@@ -28,6 +29,7 @@ export const findAvailableSlots = async (specializationSlug) => {
   return result.rows;
 };
 
+// --- MAKE SURE THIS IS BELOW IT ---
 export const createBookingTransaction = async (slotId, patientId) => {
   const client = await pool.connect();
   
@@ -35,7 +37,7 @@ export const createBookingTransaction = async (slotId, patientId) => {
     await client.query('BEGIN');
 
     const slotCheckSql = `
-      SELECT id, status FROM slots 
+      SELECT id, start_time, end_time, status FROM slots 
       WHERE id = $1 
       FOR UPDATE;
     `;
@@ -45,17 +47,33 @@ export const createBookingTransaction = async (slotId, patientId) => {
       throw new Error('SLOT_NOT_FOUND');
     }
 
-    const slot = slotResult.rows[0];
+    const targetSlot = slotResult.rows[0];
 
-    if (slot.status !== 'available') {
+    if (targetSlot.status !== 'available') {
       throw new Error('SLOT_ALREADY_BOOKED');
     }
 
-    const updateSlotSql = `
-      UPDATE slots 
-      SET status = 'booked' 
-      WHERE id = $1;
+    const overlapCheckSql = `
+      SELECT b.id 
+      FROM bookings b
+      INNER JOIN slots s ON b.slot_id = s.id
+      WHERE b.patient_id = $1 
+        AND b.status = 'confirmed'
+        AND s.start_time < $2 
+        AND s.end_time > $3;
     `;
+    
+    const overlapResult = await client.query(overlapCheckSql, [
+      patientId, 
+      targetSlot.end_time, 
+      targetSlot.start_time
+    ]);
+
+    if (overlapResult.rows.length > 0) {
+      throw new Error('PATIENT_SCHEDULE_OVERLAP');
+    }
+
+    const updateSlotSql = `UPDATE slots SET status = 'booked' WHERE id = $1;`;
     await client.query(updateSlotSql, [slotId]);
 
     const createBookingSql = `
@@ -66,7 +84,6 @@ export const createBookingTransaction = async (slotId, patientId) => {
     const bookingResult = await client.query(createBookingSql, [slotId, patientId]);
 
     await client.query('COMMIT');
-    
     return bookingResult.rows[0];
 
   } catch (error) {
