@@ -5,6 +5,7 @@ import pool from './config/db.js';
 // import slotRoutes from './routes/slotRoutes.js'; 
 import slotRoutes from './routes/slotRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
+import { notFoundHandler, globalErrorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
 
@@ -16,6 +17,8 @@ app.use(express.json());
 
 app.use('/api/v1/slots', slotRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
+app.use(notFoundHandler);    
+app.use(globalErrorHandler);
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'UP', timestamp: new Date() });

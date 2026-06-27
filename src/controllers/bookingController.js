@@ -1,3 +1,4 @@
+import * as slotRepository from '../repositories/slotRepository.js';
 import * as cacheService from '../services/cacheService.js'; 
 
 export const createBooking = async (req, res) => {
@@ -23,6 +24,9 @@ export const createBooking = async (req, res) => {
     }
     if (error.message === 'SLOT_NOT_FOUND') return res.status(404).json({ success: false, message: 'The requested slot does not exist.' });
     if (error.message === 'SLOT_ALREADY_BOOKED') return res.status(409).json({ success: false, message: 'Conflict: This appointment slot has already been taken.' });
+    console.log('--- DIRECT DATABASE FAULT ---', error);
+
+    console.error('Transactional Booking Exception:', error);
     return res.status(500).json({ success: false, message: 'Internal server error processing transaction.' });
   }
 };
