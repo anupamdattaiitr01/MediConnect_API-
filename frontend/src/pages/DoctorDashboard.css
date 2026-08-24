@@ -1,0 +1,106 @@
+.dash-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* The publish form follows as you scroll a long slot list. */
+.publish-panel { position: sticky; top: 92px; }
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 1rem;
+  margin-bottom: var(--space-4);
+}
+
+.panel-title svg { color: var(--green); }
+
+.publish-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.publish-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+
+.publish-stats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-3);
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+}
+
+.publish-stats strong {
+  font-size: 1.4rem;
+  color: var(--green);
+  line-height: 1.1;
+}
+
+.slot-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.slot-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.slot-row.is-past { opacity: 0.6; }
+
+.slot-row-when { display: flex; flex-direction: column; line-height: 1.35; min-width: 0; }
+.slot-row-when strong { font-size: 0.9rem; color: var(--ink); font-weight: 600; }
+
+.slot-row-who {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.86rem;
+  color: var(--body);
+  min-width: 0;
+}
+
+.slot-row-who svg { color: var(--green); flex-shrink: 0; }
+.slot-row-who span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+@media (max-width: 900px) {
+  .dash-grid { grid-template-columns: 1fr; }
+  .publish-panel { position: static; }
+}
+
+@media (max-width: 600px) {
+  .slot-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+}
+
+.dash-day-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.dash-day-head h3 { font-size: 0.92rem; }

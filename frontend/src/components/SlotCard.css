@@ -1,0 +1,75 @@
+.slot-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color var(--transition), box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.slot-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.slot-card.is-taken {
+  border-color: color-mix(in srgb, var(--danger) 35%, transparent);
+  background: var(--danger-soft);
+  transform: none;
+  box-shadow: none;
+}
+
+.slot-time {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.slot-time svg { color: var(--green); }
+
+.slot-doctor {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.slot-doctor > div {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+  min-width: 0;
+}
+
+.slot-doctor strong {
+  font-size: 0.88rem;
+  color: var(--ink);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slot-avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--green-soft);
+  color: var(--green-ink);
+  flex-shrink: 0;
+}
+
+.slot-taken-note {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--danger-ink);
+  margin: 0;
+}

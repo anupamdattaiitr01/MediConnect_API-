@@ -1,8 +1,11 @@
 import { Router } from 'express';
-import { createBooking } from '../controllers/bookingController.js';
+import { authenticate, requireRole } from '../middleware/auth.js';
+import { createBooking, myBookings } from '../controllers/bookingController.js';
 
 const router = Router();
 
-router.post('/', createBooking);
+// Patients only. A doctor hitting these gets a 403.
+router.post('/', authenticate, requireRole('patient'), createBooking);
+router.get('/my', authenticate, requireRole('patient'), myBookings);
 
 export default router;

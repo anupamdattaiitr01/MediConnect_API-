@@ -1,0 +1,18 @@
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--body);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.theme-toggle:hover {
+  background: var(--surface-3);
+  color: var(--green);
+  border-color: var(--border-strong);
+}

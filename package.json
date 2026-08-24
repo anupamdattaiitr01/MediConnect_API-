@@ -1,24 +1,27 @@
 {
-  "name": "booking_system",
+  "name": "mediconnect-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Appointment booking API: doctors publish slots, patients book them. Handles concurrent booking of the same slot and role-based access for doctors and patients.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "node --watch src/index.js",
+    "db:setup": "psql \"$DATABASE_URL\" -f src/db/schema.sql",
+    "seed": "node scripts/seed.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "type": "module",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
     "pg": "^8.22.0"
   },
-  "devDependencies": {
-    "nodemon": "^3.1.14"
+  "engines": {
+    "node": ">=20"
   }
 }

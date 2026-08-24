@@ -1,0 +1,97 @@
+/*
+ * Every colour in the app is declared here and nowhere else.
+ * Components reference variables only, which is what makes the dark theme a
+ * single attribute flip on <html> rather than a second stylesheet.
+ */
+
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #c2deb6;          /* sage page backdrop */
+  --bg-accent: #b2d5a4;   /* subtle depth behind the app shell */
+  --surface: #ffffff;     /* cards, panels, navbar */
+  --surface-2: #f4f9f0;   /* wash: table headers, inset rows */
+  --surface-3: #eaf4e3;   /* tinted panels, hover states */
+
+  --green: #3e8e4e;       /* primary accent */
+  --green-dark: #2f6b39;  /* hover / pressed */
+  --green-soft: #d7edcb;  /* pill buttons, badges */
+  --green-ink: #1f4b28;   /* text on --green-soft */
+
+  --ink: #14181a;         /* headings */
+  --body: #334036;        /* body copy */
+  --muted: #6b7a6e;       /* secondary text, captions */
+  --border: #e4eee0;
+  --border-strong: #cfe0c8;
+
+  --charcoal: #2c2c2c;    /* dark pill button from the reference */
+  --charcoal-ink: #ffffff;
+
+  --danger: #b4432f;
+  --danger-soft: #fdeceb;
+  --danger-ink: #8d3020;
+
+  --shadow-sm: 0 1px 2px rgb(20 24 26 / 6%);
+  --shadow-md: 0 8px 24px rgb(20 24 26 / 8%);
+  --shadow-lg: 0 20px 48px rgb(20 24 26 / 12%);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0f150e;
+  --bg-accent: #0a0f09;
+  --surface: #19221a;
+  --surface-2: #202b20;
+  --surface-3: #263226;
+
+  /*
+   * Accents lighten rather than darken. #3e8e4e sits at roughly 2.4:1 against
+   * the dark surface, which fails; raising luminance while keeping the hue
+   * gets it past 4.5:1 without changing the brand colour.
+   */
+  --green: #6bc47d;
+  --green-dark: #8ad69a;
+  --green-soft: #24371f;
+  --green-ink: #a7e0b3;
+
+  --ink: #e8f0e6;
+  --body: #c6d3c4;
+  --muted: #93a595;
+  --border: #2c3a2b;
+  --border-strong: #3b4d3a;
+
+  --charcoal: #e8f0e6;
+  --charcoal-ink: #14181a;
+
+  --danger: #f28b74;
+  --danger-soft: #2f1a15;
+  --danger-ink: #f9b7a7;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 30%);
+  --shadow-md: 0 8px 24px rgb(0 0 0 / 40%);
+  --shadow-lg: 0 20px 48px rgb(0 0 0 / 50%);
+}
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+
+  --radius-sm: 10px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  --shell-width: 1180px;
+  --transition: 160ms ease;
+}

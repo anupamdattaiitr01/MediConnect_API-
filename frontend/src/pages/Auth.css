@@ -1,0 +1,85 @@
+.auth {
+  display: grid;
+  place-items: center;
+  min-height: calc(100vh - 68px);
+  padding: var(--space-6) var(--space-4);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: var(--space-6);
+}
+
+.auth-head {
+  text-align: center;
+  margin-bottom: var(--space-5);
+}
+
+.auth-head p {
+  color: var(--muted);
+  margin-top: var(--space-2);
+  font-size: 0.9rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.auth-foot {
+  margin-top: var(--space-5);
+  text-align: center;
+  font-size: 0.87rem;
+  color: var(--muted);
+}
+
+/* Role picker: two big tappable cards beat a <select> for a two-way choice. */
+.role-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.role-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-4) var(--space-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.role-option:hover { background: var(--surface-3); }
+
+.role-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.role-option strong { font-size: 0.88rem; color: var(--ink); }
+.role-option span { font-size: 0.75rem; color: var(--muted); line-height: 1.35; }
+
+.role-option svg { color: var(--muted); }
+
+.role-option.is-selected {
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+
+.role-option.is-selected strong,
+.role-option.is-selected svg { color: var(--green-ink); }
+
+/* The real radio is hidden, so the ring has to come from :has(). */
+.role-option:has(input:focus-visible) {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}

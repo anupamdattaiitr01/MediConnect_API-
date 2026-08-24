@@ -1,0 +1,74 @@
+.booking-sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.section-title {
+  font-size: 0.95rem;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.booking-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.booking-card {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color var(--transition);
+}
+
+.booking-card:hover { border-color: var(--border-strong); }
+
+/* Past appointments recede rather than disappear. */
+.booking-card.is-past { background: var(--surface-2); opacity: 0.82; }
+
+.booking-when { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+
+.booking-day {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.booking-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.booking-doctor { display: flex; align-items: center; gap: var(--space-3); }
+.booking-doctor > div { display: flex; flex-direction: column; line-height: 1.3; }
+.booking-doctor strong { font-size: 0.87rem; color: var(--ink); font-weight: 600; }
+
+.booking-avatar {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--green-soft);
+  color: var(--green-ink);
+  flex-shrink: 0;
+}
+
+@media (max-width: 700px) {
+  .booking-card {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    align-items: flex-start;
+  }
+}

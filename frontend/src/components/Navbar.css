@@ -1,0 +1,124 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  height: 68px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.brand:hover { text-decoration: none; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.nav-links a {
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--body);
+  transition: background var(--transition), color var(--transition);
+}
+
+.nav-links a:hover {
+  background: var(--surface-3);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* react-router adds .active to the matching NavLink. */
+.nav-links a.active {
+  background: var(--green-soft);
+  color: var(--green-ink);
+  font-weight: 600;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-left: var(--space-2);
+}
+
+.nav-avatar {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .nav-avatar { color: #0f150e; }
+
+.nav-user-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.nav-user-text strong {
+  font-size: 0.85rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.nav-user-text .small { font-size: 0.72rem; text-transform: capitalize; }
+
+@media (max-width: 900px) {
+  .nav-user-text { display: none; }
+}
+
+@media (max-width: 760px) {
+  .navbar-inner {
+    height: auto;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    padding-top: var(--space-3);
+    padding-bottom: var(--space-3);
+  }
+
+  .nav-links {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    /* Let the pills scroll sideways instead of wrapping into a tall stack. */
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { white-space: nowrap; }
+
+  .brand { flex: 1; }
+  .nav-logout-text { display: none; }
+}
