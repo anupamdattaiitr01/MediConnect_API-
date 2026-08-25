@@ -1,5 +1,4 @@
 const BASE_URL = (import.meta.env.VITE_API_URL ?? '/api').replace(/\/$/, '');
-
 /**
  * An error carrying the HTTP status, so callers can branch on it.
  *
